@@ -1,17 +1,21 @@
 <html>
     <head>
         <title>CMocha</title>
+        <style type="text/css" media="screen">
+            #editor { 
+                position: absolute;
+                top: 400;
+                right: 400;
+                bottom: 400;
+                left: 400;
+            }
+        </style>
     </head>
     
     <body>
         <h3 class="center">CMocha</h3>
         <h5 id="connection_state"></h5>
-        <textarea class="broad_message_box" rows="10" cols="20" placeholder="Write code here"></textarea>
-        <hr>
-        <textarea class="person_message_box" rows="10" cols="20" placeholder="Send a personalized message"></textarea>
-        <input type="text" id="personalized_to" placeholder="to" />
-        <input type="text" id="personalized_from" placeholder="from" />
-        <button id="send_personalized_btn">Send Personalized</button>
+        <div id="editor" class="mocha-editor"></div>
         <hr>
         <p class="messages_received">
             
@@ -25,7 +29,7 @@
                 document.getElementById("connection_state").innerHTML = "You are connected";
                 // Send the username when user is connected
                 // This is required to attach the username to the server socket
-                ws.send(JSON.stringify({"username" : "suhailgupta03@gmail.com"});
+                ws.send(JSON.stringify({"username" : "suhailgupta03@gmail.com"}));
             }
             
             ws.onclose = function() {
@@ -41,26 +45,26 @@
                  document.getElementById("connection_state").innerHTML = "Error occured while trying to connect " + socketAddress;
             }
             
-            document.getElementsByClassName("broad_message_box")[0].onkeypress = function(event) {
+            document.getElementsByClassName("mocha-editor")[0].onkeypress = function(event) {
                 if(event.keyCode == 13) {
                     var messageObject = {
-                      'lang' : 'php',
-                      'source' : this.value,
+                      'lang' : 'java',
+                      'source' : editor.getValue(),
                       'time_limit' : '',
-                      'memory_limit' : ''
+                      'memory_limit' :''
                     };
                     var valToSend = JSON.stringify(messageObject); 
                     ws.send(valToSend);
                 }
             }
-            
-            document.getElementById("send_personalized_btn").onclick = function(event) {
-                var message = document.getElementsByClassName('person_message_box')[0].innerHTML;
-                var from = document.getElementById('personalized_from').value;
-                var to = document.getElementById('personalized_to').value;
-                var object = {"message" : message, "from" : from, "to" : to, "action" : "pmessage"};
-                ws.send(JSON.stringify(object));
-            }
+        </script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script>
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/monokai");
+            editor.getSession().setMode("ace/mode/java");
         </script>
     </body>
 </html>
