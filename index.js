@@ -4,14 +4,18 @@ var source = "class Tester{public static void main(String args[]){System.out.pri
 
 var phpSource = "<?php for($i=0;$i<10;$i++){echo $i;}";
 
+var jsSource = "console.log('hello from js');";
+
 var messageObject = {
-  'lang' : 'php',
-  'source' : phpSource,
+  'lang' : 'javascript',
+  'source' : jsSource,
   'time_limit' : '',
   'memory_limit' : ''
 };
 
-messageObject = JSON.stringify(messageObject);
-
 var ingress = new Ingress();
 ingress.parseMessage(messageObject);
+
+ingress.on('output',(message) => {
+    console.log(message);
+});
