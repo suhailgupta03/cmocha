@@ -2,12 +2,21 @@
     <head>
         <title>CMocha</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+                #editor { 
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                }
+        </style>
     </head>
     
     <body>
         <h3 class="center">CMocha</h3>
         <h5 id="connection_state"></h5>
-        <div id="editor" class="mocha-editor">function a(){}</div>
+       
         <div class="container">
             <div class="row">
                 <div class="col-md-5">
@@ -20,8 +29,9 @@
                     </p>
                 </div>
             
-                <div class="col-md-7">
-
+                <div class="col-md-7" style="position:relative;height:400px;">
+                        <div id="editor" class="mocha-editor">function a(){}</div>
+                  
                 </div>
             </div>
         </div>
@@ -69,12 +79,12 @@
 //            }
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         
         <script>
             var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
+            editor.setTheme("ace/theme/chrome");
             editor.getSession().setMode("ace/mode/javascript");
         </script>
     </body>
